@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Registro e Inicio de Sesión - Grunge & Glory</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&family=Unica+One&display=swap" rel="stylesheet">
+<style>
+  /* CSS GLOBAL - APLICADO A TODAS LAS PÁGINAS */
+  body {
+    margin: 0;
+    font-family: 'Share Tech Mono', monospace;
+    color: #00ff00; /* Verde neón */
+    background: #0e0e0e url('fondo-blur.jpg') no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: rgba(0, 0, 0, 0.85);
+    border-bottom: 2px solid #ff0000; /* Rojo vibrante */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  header h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    color: #00ff00; /* Verde neón */
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem; /* Aumentado el espacio entre enlaces */
+    margin: 0;
+    padding: 0;
+  }
+
+  nav ul li a {
+    text-decoration: none;
+    color: #00ff00; /* Verde neón */
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: 'Unica One', sans-serif;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    padding: 0.5rem 0.8rem;
+    border-radius: 4px;
+  }
+
+  nav ul li a:hover {
+    color: #ff0000; /* Efecto hover rojo */
+    text-shadow: 0 0 8px rgba(255, 0, 0, 0.7);
+    background-color: rgba(255, 0, 0, 0.05);
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 2rem auto;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2.5rem;
+    border-radius: 8px;
+    border: 2px solid #2d0000; /* Rojo oscuro */
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6), inset 0 0 10px rgba(0, 255, 0, 0.3);
+  }
+
+  h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+    margin-bottom: 2rem;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
+    font-size: 2rem;
+  }
+
+  input, textarea {
+    background-color: #2a2a2a;
+    color: #00ff00;
+    border: 1px solid #ff0000;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+    border-radius: 4px;
+    box-shadow: inset 0 0 8px rgba(255, 0, 0, 0.5);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: rgba(0, 255, 0, 0.5);
+  }
+
+  input:focus, textarea:focus {
+    border-color: #00ff00;
+    box-shadow: inset 0 0 12px #00ff00;
+  }
+
+  button {
+    background: #4a1e1e;
+    color: #00ff00;
+    border: 1px solid #ff0000;
+    padding: 0.9rem 1.8rem;
+    border-radius: 4px;
+    font-family: 'Share Tech Mono', monospace;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+  }
+
+  button:hover {
+    background: #660000;
+    box-shadow: 0 0 10px #00ff00;
+    color: #fff;
+  }
+
+  .error {
+    color: #ff3b3b;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-align: left;
+    margin-top: -0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #00ff00;
+    border-top: 2px solid #ff0000;
+    margin-top: 4rem;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  /* CSS ESPECÍFICO DE LA PÁGINA DE REGISTRO/INICIO DE SESIÓN */
+  form {
+    max-width: 500px;
+    margin: 0 auto 3rem; /* Más margen inferior entre formularios */
+    gap: 1.2rem; /* Más espacio entre campos */
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>GRUNGE & GLORY</h1>
+  <nav>
+    <ul>
+      <li><a href="file:///C:/Users/asus/OneDrive/Escritorio/Grunge%20&%20Glory/Grunge%20&%20Glory.html">Inicio</a></li>
+      <li><a href="tienda.html">Tienda</a></li>
+      <li><a href="comentarios.html">Foro</a></li>
+      <li><a href="usario y resgristro.html">Registro</a></li>
+      <li><a href="calendario.html">Agenda</a></li>
+       <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="Subida.html">Galería</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>Registro</h2>
+  <form id="form-registro">
+    <input type="text" id="nombre" placeholder="Nombre de usuario" required>
+    <input type="email" id="email" placeholder="Correo electrónico" required>
+    <input type="password" id="password" placeholder="Contraseña" required>
+    <button type="submit">Registrarse</button>
+  </form>
+
+  <h2>Inicio de Sesión</h2>
+  <form id="form-login">
+    <input type="email" id="email-login" placeholder="Correo electrónico" required>
+    <input type="password" id="password-login" placeholder="Contraseña" required>
+    <button type="submit">Iniciar Sesión</button>
+  </form>
+</div>
+
+<footer>
+  <p>&copy; 2025 Grunge & Glory. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+  let usuarios = [];
+
+  function registrarUsuario(nombre, email, password) {
+    if (nombre.length < 3) {
+      alert("El nombre de usuario debe tener al menos 3 caracteres.");
+      return;
+    }
+    if (!email.includes('@') || !email.includes('.')) { // Validación básica de email
+        alert("Ingrese un correo electrónico válido.");
+        return;
+    }
+    if (password.length < 6) {
+      alert("La contraseña debe tener al menos 6 caracteres.");
+      return;
+    }
+
+    const usuarioExistente = usuarios.find(u => u.email === email);
+    if (usuarioExistente) {
+        alert("El correo electrónico ya está registrado.");
+        return;
+    }
+
+    const usuario = { nombre, email, password };
+    usuarios.push(usuario);
+    alert(`¡Registro exitoso! Bienvenido, ${nombre}.`);
+    console.log("Usuarios registrados:", usuarios);
+  }
+
+  function iniciarSesion(email, password) {
+    if (!email || !password) {
+        alert("Por favor, ingrese su correo electrónico y contraseña.");
+        return;
+    }
+    const usuario = usuarios.find(u => u.email === email && u.password === password);
+    if (usuario) {
+      alert(`¡Bienvenido, ${usuario.nombre}!`);
+    } else {
+      alert("Correo electrónico o contraseña incorrectos.");
+    }
+  }
+
+  const formRegistro = document.getElementById('form-registro');
+  const formLogin = document.getElementById('form-login');
+
+  formRegistro.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const nombre = document.getElementById('nombre').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    registrarUsuario(nombre, email, password);
+    formRegistro.reset();
+  });
+
+  formLogin.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const email = document.getElementById('email-login').value;
+    const password = document.getElementById('password-login').value;
+    iniciarSesion(email, password);
+    formLogin.reset();
+  });
+</script>
+</body>
+<!-- Manejo de sesiones y roles básicos -->
+<script>
+  // Guardar usuarios en localStorage para persistencia básica
+  function guardarUsuarios() {
+    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+  }
+
+  function cargarUsuarios() {
+    const data = localStorage.getItem('usuarios');
+    if (data) {
+      usuarios = JSON.parse(data);
+    }
+  }
+
+  // Guardar sesión activa
+  function guardarSesion(email) {
+    localStorage.setItem('sesionActiva', email);
+  }
+
+  function obtenerSesion() {
+    return localStorage.getItem('sesionActiva');
+  }
+
+  function cerrarSesion() {
+    localStorage.removeItem('sesionActiva');
+    alert("Sesión cerrada.");
+    location.reload();
+  }
+
+  // Asignar rol básico: el primer usuario es admin, los demás son usuarios
+  function asignarRol(email) {
+    if (usuarios.length === 0) return 'admin';
+    return 'usuario';
+  }
+
+  // Modificar registro para incluir rol y persistencia
+  function registrarUsuario(nombre, email, password) {
+    if (nombre.length < 3) {
+      alert("El nombre de usuario debe tener al menos 3 caracteres.");
+      return;
+    }
+    if (!email.includes('@') || !email.includes('.')) {
+      alert("Ingrese un correo electrónico válido.");
+      return;
+    }
+    if (password.length < 6) {
+      alert("La contraseña debe tener al menos 6 caracteres.");
+      return;
+    }
+
+    const usuarioExistente = usuarios.find(u => u.email === email);
+    if (usuarioExistente) {
+      alert("El correo electrónico ya está registrado.");
+      return;
+    }
+
+    const rol = asignarRol(email);
+    const usuario = { nombre, email, password, rol };
+    usuarios.push(usuario);
+    guardarUsuarios();
+    guardarSesion(email);
+    alert(`¡Registro exitoso! Bienvenido, ${nombre}. Rol: ${rol}`);
+    mostrarBotonCerrarSesion();
+    console.log("Usuarios registrados:", usuarios);
+  }
+
+  // Modificar inicio de sesión para guardar sesión y mostrar rol
+  function iniciarSesion(email, password) {
+    if (!email || !password) {
+      alert("Por favor, ingrese su correo electrónico y contraseña.");
+      return;
+    }
+    const usuario = usuarios.find(u => u.email === email && u.password === password);
+    if (usuario) {
+      guardarSesion(email);
+      alert(`¡Bienvenido, ${usuario.nombre}! Rol: ${usuario.rol}`);
+      mostrarBotonCerrarSesion();
+    } else {
+      alert("Correo electrónico o contraseña incorrectos.");
+    }
+  }
+
+  // Mostrar botón de cerrar sesión si hay sesión activa
+  function mostrarBotonCerrarSesion() {
+    if (obtenerSesion()) {
+      if (!document.getElementById('cerrar-sesion')) {
+        const btn = document.createElement('button');
+        btn.id = 'cerrar-sesion';
+        btn.textContent = 'Cerrar Sesión';
+        btn.style.margin = '1rem auto 2rem';
+        btn.style.display = 'block';
+        btn.onclick = cerrarSesion;
+        document.querySelector('.container').prepend(btn);
+      }
+    }
+  }
+
+  // Al cargar la página
+  cargarUsuarios();
+  if (obtenerSesion()) {
+    mostrarBotonCerrarSesion();
+  }
+  // Modo oscuro / claro con persistencia en LocalStorage
+  function aplicarTema(tema) {
+    if (tema === 'claro') {
+      document.body.style.background = "#f4f4f4";
+      document.body.style.color = "#222";
+      document.querySelectorAll('.container, .carrito-container').forEach(el => {
+        el.style.background = "rgba(0,0,0,0.03)";
+        el.style.borderColor = "#ccc";
+        el.style.boxShadow = "0 0 20px rgba(0,0,0,0.1), inset 0 0 10px rgba(0,0,0,0.05)";
+      });
+      document.querySelectorAll('.producto').forEach(el => {
+        el.style.background = "#fff";
+        el.style.borderColor = "#ddd";
+        el.style.boxShadow = "inset 0 0 10px rgba(0,0,0,0.05)";
+      });
+      document.querySelectorAll('header, footer').forEach(el => {
+        el.style.backgroundColor = "#fff";
+        el.style.color = "#222";
+        el.style.borderColor = "#222";
+      });
+    } else {
+      document.body.style.background = "#0e0e0e url('fondo-blur.jpg') no-repeat center center fixed";
+      document.body.style.backgroundSize = "cover";
+      document.body.style.color = "#00ff00";
+      document.querySelectorAll('.container, .carrito-container').forEach(el => {
+        el.style.background = "rgba(255,255,255,0.05)";
+        el.style.borderColor = "#2d0000";
+        el.style.boxShadow = "0 0 20px rgba(255,0,0,0.6), inset 0 0 10px rgba(0,255,0,0.3)";
+      });
+      document.querySelectorAll('.producto').forEach(el => {
+        el.style.background = "#2a2a2a";
+        el.style.borderColor = "#4b4b4b";
+        el.style.boxShadow = "inset 0 0 10px rgba(0,0,0,0.7)";
+      });
+      document.querySelectorAll('header, footer').forEach(el => {
+        el.style.backgroundColor = "rgba(0,0,0,0.85)";
+        el.style.color = "#00ff00";
+        el.style.borderColor = "#ff0000";
+      });
+    }
+  }
+
+  function guardarTema(tema) {
+    localStorage.setItem('tema', tema);
+  }
+
+  function obtenerTema() {
+    return localStorage.getItem('tema') || 'oscuro';
+  }
+
+  function alternarTema() {
+    const temaActual = obtenerTema();
+    const nuevoTema = temaActual === 'oscuro' ? 'claro' : 'oscuro';
+    aplicarTema(nuevoTema);
+    guardarTema(nuevoTema);
+    document.getElementById('btn-tema').textContent = nuevoTema === 'oscuro' ? 'Modo claro' : 'Modo oscuro';
+  }
+
+  // Botón flotante para alternar tema
+  const btn = document.createElement('button');
+  btn.id = 'btn-tema';
+  btn.textContent = obtenerTema() === 'oscuro' ? 'Modo claro' : 'Modo oscuro';
+  btn.style.position = 'fixed';
+  btn.style.bottom = '24px';
+  btn.style.right = '24px';
+  btn.style.zIndex = '9999';
+  btn.style.background = '#222';
+  btn.style.color = '#00ff00';
+  btn.style.border = '2px solid #ff0000';
+  btn.style.padding = '0.7rem 1.2rem';
+  btn.style.borderRadius = '6px';
+  btn.style.fontFamily = "'Share Tech Mono', monospace";
+  btn.style.boxShadow = '0 0 12px #00ff00';
+  btn.style.cursor = 'pointer';
+  btn.onclick = alternarTema;
+  document.body.appendChild(btn);
+
+  // Aplicar tema al cargar
+  aplicarTema(obtenerTema());
+   // Adaptación fluida a móvil, tablet y escritorio (responsive)
+  window.addEventListener('DOMContentLoaded', () => {
+    function ajustarResponsive() {
+      if (window.innerWidth < 600) {
+        document.querySelector('.container').style.padding = '1rem';
+        document.querySelector('.container').style.maxWidth = '98vw';
+      } else {
+        document.querySelector('.container').style.padding = '2.5rem';
+        document.querySelector('.container').style.maxWidth = '900px';
+      }
+    }
+    ajustarResponsive();
+    window.addEventListener('resize', ajustarResponsive);
+  });
+</script>
+</html>
+</script>
+</html>

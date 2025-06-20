@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tienda Online - Grunge & Glory</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&family=Unica+One&display=swap" rel="stylesheet">
+  <style>
+    /* CSS GLOBAL - APLICADO A TODAS LAS PÁGINAS */
+    body {
+      margin: 0;
+      font-family: 'Share Tech Mono', monospace;
+      color: #00ff00; /* Verde neón */
+      background: #0e0e0e url('fondo-blur.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: rgba(0, 0, 0, 0.85);
+      border-bottom: 2px solid #ff0000; /* Rojo vibrante */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      color: #00ff00; /* Verde neón */
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem; /* Aumentado el espacio entre enlaces */
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #00ff00; /* Verde neón */
+      font-weight: bold;
+      text-transform: uppercase;
+      font-family: 'Unica One', sans-serif;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+      padding: 0.5rem 0.8rem;
+      border-radius: 4px;
+    }
+
+    nav ul li a:hover {
+      color: #ff0000; /* Efecto hover rojo */
+      text-shadow: 0 0 8px rgba(255, 0, 0, 0.7);
+      background-color: rgba(255, 0, 0, 0.05);
+    }
+
+    .container {
+      max-width: 1200px; /* Ampliado para la tienda */
+      margin: 2rem auto;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2.5rem;
+      border-radius: 8px;
+      border: 2px solid #2d0000; /* Rojo oscuro */
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.6), inset 0 0 10px rgba(0, 255, 0, 0.3);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: #fff;
+      width: 100%;
+      margin-bottom: 2rem;
+      text-align: center;
+      text-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
+      font-size: 2rem;
+    }
+
+    input, textarea {
+      background-color: #2a2a2a;
+      color: #00ff00;
+      border: 1px solid #ff0000;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1rem;
+      padding: 0.8rem 1rem;
+      border-radius: 4px;
+      box-shadow: inset 0 0 8px rgba(255, 0, 0, 0.5);
+      transition: border-color 0.3s, box-shadow 0.3s;
+      outline: none;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: rgba(0, 255, 0, 0.5);
+    }
+
+    input:focus, textarea:focus {
+      border-color: #00ff00;
+      box-shadow: inset 0 0 12px #00ff00;
+    }
+
+    button {
+      background: #4a1e1e;
+      color: #00ff00;
+      border: 1px solid #ff0000;
+      padding: 0.9rem 1.8rem;
+      border-radius: 4px;
+      font-family: 'Share Tech Mono', monospace;
+      cursor: pointer;
+      transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+    }
+
+    button:hover {
+      background: #660000;
+      box-shadow: 0 0 10px #00ff00;
+      color: #fff;
+    }
+
+    .error {
+      color: #ff3b3b;
+      font-weight: bold;
+      font-size: 0.9rem;
+      text-align: left;
+      margin-top: -0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: rgba(0, 0, 0, 0.9);
+      color: #00ff00;
+      border-top: 2px solid #ff0000;
+      margin-top: 4rem;
+      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    /* CSS ESPECÍFICO DE LA PÁGINA DE TIENDA */
+    .producto {
+      background-color: #2a2a2a;
+      border: 1px solid #4b4b4b;
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      width: 280px;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.7); /* Sombra interior */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .producto:hover {
+      transform: translateY(-8px); /* Elevación más pronunciada */
+      box-shadow: 0 0 20px rgba(0, 255, 0, 0.6); /* Brillo verde más intenso al pasar el mouse */
+    }
+
+    .producto img {
+      max-width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      border: 1px solid #ff0000; /* Borde rojo en la imagen */
+    }
+
+    .producto h3 {
+      font-family: 'Orbitron', sans-serif;
+      color: #00ff00; /* Títulos de producto en verde neón */
+      margin-top: 0;
+      margin-bottom: 0.8rem; /* Más margen */
+      font-size: 1.4rem; /* Más grande */
+    }
+
+    .producto p {
+      color: #ccc;
+      font-family: 'Unica One', sans-serif;
+      font-size: 1.15rem; /* Un poco más grande */
+      margin-bottom: 1.5rem;
+    }
+
+    .producto button {
+      width: 100%;
+    }
+
+    .carrito-container {
+      max-width: 900px;
+      margin: 4rem auto 2rem; /* Más espacio arriba, un poco menos abajo */
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2.5rem;
+      border-radius: 8px;
+      border: 2px solid #2d0000;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.6), inset 0 0 10px rgba(0, 255, 0, 0.3);
+    }
+
+    .carrito-container h2 {
+      margin-bottom: 2rem;
+    }
+
+    #lista-carrito {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 2rem;
+      border-top: 1px dashed #4b4b4b;
+      padding-top: 1.5rem; /* Más padding */
+    }
+
+    #lista-carrito li {
+      background-color: #1f1f1f;
+      border: 1px solid #2a2a2a;
+      color: #eee;
+      padding: 1rem 1.5rem; /* Más padding */
+      margin-bottom: 0.7rem; /* Más margen */
+      border-radius: 4px;
+      font-family: 'Unica One', sans-serif;
+      font-size: 1.05rem; /* Un poco más grande */
+    }
+
+    .total-compra {
+      text-align: right;
+      font-size: 1.4rem; /* Más grande */
+      color: #00ff00;
+      font-family: 'Orbitron', sans-serif;
+      margin-top: 2rem; /* Más margen */
+      border-top: 2px solid #4a1e1e;
+      padding-top: 1.5rem;
+    }
+
+    .total-compra span {
+      font-size: 1.8rem; /* Tamaño más grande para el número total */
+      text-shadow: 0 0 8px rgba(0, 255, 0, 0.7); /* Sombra para el total */
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>GRUNGE & GLORY</h1>
+    <nav>
+      <ul>
+        <li><a href="file:///C:/Users/asus/OneDrive/Escritorio/Grunge%20&%20Glory/Grunge%20&%20Glory.html">Inicio</a></li>
+        <li><a href="tienda.html">Tienda</a></li>
+        <li><a href="comentarios.html">Foro</a></li>
+        <li><a href="usario y resgristro.html">Registro</a></li>
+        <li><a href="calendario.html">Agenda</a></li>
+        <li><a href="Formulario%20de%20contacto.html">Contacto</a></li>
+            <li><a href="Subida.html">Galería</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Nuestros Productos</h2>
+    <div id="lista-productos"></div>
+  </div>
+
+  <div class="carrito-container">
+    <h2>Carrito de Compras</h2>
+    <ul id="lista-carrito">
+      </ul>
+    <div class="total-compra">
+      Total: Bs <span id="total">0</span>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Grunge & Glory. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const productos = [
+     
+{ id: 3, nombre: "Botas Militares", precio: 180, imagen: "tu-imagen-destacada3.jpg.jpg" },
+{ id: 4, nombre: "Denim Cobrax Corset", precio: 90, imagen: "tu-imagen-destacada4.jpg.jpg" },
+{ id: 5, nombre: "Carolina Belt", precio: 30, imagen: "tu-imagen-destacada5.jpg.jpg" },
+{ id: 7, nombre: "Sunday Dress", precio: 60, imagen: "tu-imagen-destacada7.jpg.jpg" },
+
+
+    ];
+
+    const carrito = [];
+
+    function renderProductos() {
+      const lista = document.getElementById('lista-productos');
+      lista.innerHTML = '';
+      productos.forEach(prod => {
+        const div = document.createElement('div');
+        div.className = 'producto';
+        div.innerHTML = `
+          <img src="${prod.imagen}" alt="${prod.nombre}">
+          <h3>${prod.nombre}</h3>
+          <p>Precio: Bs ${prod.precio}</p>
+          <button onclick="agregarAlCarrito(${prod.id})">Agregar al carrito</button>
+        `;
+        lista.appendChild(div);
+      });
+    }
+
+    function renderCarrito() {
+      const lista = document.getElementById('lista-carrito');
+      lista.innerHTML = '';
+      let total = 0;
+      carrito.forEach(item => {
+        lista.innerHTML += `<li>${item.nombre} x${item.cantidad} - Bs ${item.precio * item.cantidad}</li>`;
+        total += item.precio * item.cantidad;
+      });
+      document.getElementById('total').textContent = total;
+    }
+
+    window.agregarAlCarrito = function(id) {
+      const productoExistente = carrito.find(item => item.id === id);
+      if (productoExistente) {
+        productoExistente.cantidad++;
+      } else {
+        const producto = productos.find(prod => prod.id === id);
+        carrito.push({ ...producto, cantidad: 1 });
+      }
+      renderCarrito();
+    }
+
+    renderProductos();
+    renderCarrito();
+    // Permite modificar cantidades y eliminar productos del carrito
+
+    function renderCarrito() {
+      const lista = document.getElementById('lista-carrito');
+      lista.innerHTML = '';
+      let total = 0;
+      carrito.forEach((item, idx) => {
+      lista.innerHTML += `
+        <li>
+        ${item.nombre} 
+        <button onclick="cambiarCantidad(${item.id}, -1)" style="margin:0 6px;">-</button>
+        x${item.cantidad}
+        <button onclick="cambiarCantidad(${item.id}, 1)" style="margin:0 6px;">+</button>
+        - Bs ${item.precio * item.cantidad}
+        <button onclick="eliminarDelCarrito(${item.id})" style="margin-left:12px;color:#ff3b3b;">Eliminar</button>
+        </li>
+      `;
+      total += item.precio * item.cantidad;
+      });
+      document.getElementById('total').textContent = total;
+    }
+
+    window.cambiarCantidad = function(id, cambio) {
+      const item = carrito.find(i => i.id === id);
+      if (!item) return;
+      item.cantidad += cambio;
+      if (item.cantidad < 1) {
+      eliminarDelCarrito(id);
+      }
+      renderCarrito();
+    }
+
+    window.eliminarDelCarrito = function(id) {
+      const idx = carrito.findIndex(i => i.id === id);
+      if (idx !== -1) carrito.splice(idx, 1);
+      renderCarrito();
+    }
+    // Motor de búsqueda de productos
+    const inputBusqueda = document.createElement('input');
+    inputBusqueda.type = 'text';
+    inputBusqueda.placeholder = 'Buscar productos...';
+    inputBusqueda.style.margin = '2rem auto 1rem';
+    inputBusqueda.style.display = 'block';
+    inputBusqueda.style.width = '320px';
+    inputBusqueda.style.fontSize = '1.1rem';
+    inputBusqueda.style.background = '#181818';
+    inputBusqueda.style.color = '#00ff00';
+    inputBusqueda.style.border = '1px solid #ff0000';
+    inputBusqueda.style.borderRadius = '4px';
+    inputBusqueda.style.padding = '0.7rem 1rem';
+
+    // Insertar el input antes de la lista de productos
+    const container = document.querySelector('.container');
+    container.insertBefore(inputBusqueda, container.children[1]);
+
+    inputBusqueda.addEventListener('input', function() {
+      const texto = this.value.toLowerCase();
+      const productosFiltrados = productos.filter(p =>
+      p.nombre.toLowerCase().includes(texto)
+      );
+      renderProductosFiltrados(productosFiltrados);
+    });
+
+    function renderProductosFiltrados(listaProductos) {
+      const lista = document.getElementById('lista-productos');
+      lista.innerHTML = '';
+      listaProductos.forEach(prod => {
+      const div = document.createElement('div');
+      div.className = 'producto';
+      div.innerHTML = `
+        <img src="${prod.imagen}" alt="${prod.nombre}">
+        <h3>${prod.nombre}</h3>
+        <p>Precio: Bs ${prod.precio}</p>
+        <button onclick="agregarAlCarrito(${prod.id})">Agregar al carrito</button>
+      `;
+      lista.appendChild(div);
+      });
+      // Si no hay resultados
+      if (listaProductos.length === 0) {
+      lista.innerHTML = '<p style="color:#ff3b3b;text-align:center;">No se encontraron productos.</p>';
+      }
+    }
+  </script>
+</body>
+<script>
+  // Modo oscuro / claro con persistencia en LocalStorage
+  function aplicarTema(tema) {
+    if (tema === 'claro') {
+      document.body.style.background = "#f4f4f4";
+      document.body.style.color = "#222";
+      document.querySelectorAll('.container, .carrito-container').forEach(el => {
+        el.style.background = "rgba(0,0,0,0.03)";
+        el.style.borderColor = "#ccc";
+        el.style.boxShadow = "0 0 20px rgba(0,0,0,0.1), inset 0 0 10px rgba(0,0,0,0.05)";
+      });
+      document.querySelectorAll('.producto').forEach(el => {
+        el.style.background = "#fff";
+        el.style.borderColor = "#ddd";
+        el.style.boxShadow = "inset 0 0 10px rgba(0,0,0,0.05)";
+      });
+      document.querySelectorAll('header, footer').forEach(el => {
+        el.style.backgroundColor = "#fff";
+        el.style.color = "#222";
+        el.style.borderColor = "#222";
+      });
+    } else {
+      document.body.style.background = "#0e0e0e url('fondo-blur.jpg') no-repeat center center fixed";
+      document.body.style.backgroundSize = "cover";
+      document.body.style.color = "#00ff00";
+      document.querySelectorAll('.container, .carrito-container').forEach(el => {
+        el.style.background = "rgba(255,255,255,0.05)";
+        el.style.borderColor = "#2d0000";
+        el.style.boxShadow = "0 0 20px rgba(255,0,0,0.6), inset 0 0 10px rgba(0,255,0,0.3)";
+      });
+      document.querySelectorAll('.producto').forEach(el => {
+        el.style.background = "#2a2a2a";
+        el.style.borderColor = "#4b4b4b";
+        el.style.boxShadow = "inset 0 0 10px rgba(0,0,0,0.7)";
+      });
+      document.querySelectorAll('header, footer').forEach(el => {
+        el.style.backgroundColor = "rgba(0,0,0,0.85)";
+        el.style.color = "#00ff00";
+        el.style.borderColor = "#ff0000";
+      });
+    }
+  }
+
+  function guardarTema(tema) {
+    localStorage.setItem('tema', tema);
+  }
+
+  function obtenerTema() {
+    return localStorage.getItem('tema') || 'oscuro';
+  }
+
+  function alternarTema() {
+    const temaActual = obtenerTema();
+    const nuevoTema = temaActual === 'oscuro' ? 'claro' : 'oscuro';
+    aplicarTema(nuevoTema);
+    guardarTema(nuevoTema);
+    document.getElementById('btn-tema').textContent = nuevoTema === 'oscuro' ? 'Modo claro' : 'Modo oscuro';
+  }
+
+  // Botón flotante para alternar tema
+  const btn = document.createElement('button');
+  btn.id = 'btn-tema';
+  btn.textContent = obtenerTema() === 'oscuro' ? 'Modo claro' : 'Modo oscuro';
+  btn.style.position = 'fixed';
+  btn.style.bottom = '24px';
+  btn.style.right = '24px';
+  btn.style.zIndex = '9999';
+  btn.style.background = '#222';
+  btn.style.color = '#00ff00';
+  btn.style.border = '2px solid #ff0000';
+  btn.style.padding = '0.7rem 1.2rem';
+  btn.style.borderRadius = '6px';
+  btn.style.fontFamily = "'Share Tech Mono', monospace";
+  btn.style.boxShadow = '0 0 12px #00ff00';
+  btn.style.cursor = 'pointer';
+  btn.onclick = alternarTema;
+  document.body.appendChild(btn);
+
+  // Aplicar tema al cargar
+  aplicarTema(obtenerTema());
+  // Adaptación fluida a móvil, tablet y escritorio (responsive)
+  function aplicarResponsive() {
+    const style = document.createElement('style');
+    style.textContent = `
+      @media (max-width: 900px) {
+        .container, .carrito-container {
+          max-width: 98vw;
+          padding: 1rem;
+        }
+        .producto {
+          width: 90vw;
+          max-width: 340px;
+        }
+      }
+      @media (max-width: 600px) {
+        header, footer {
+          padding: 0.7rem 0.5rem;
+        }
+        nav ul {
+          gap: 0.5rem;
+        }
+        .container, .carrito-container {
+          padding: 0.7rem;
+        }
+        h2 {
+          font-size: 1.2rem;
+        }
+        .producto {
+          padding: 0.7rem;
+          width: 98vw;
+          max-width: 98vw;
+        }
+        #lista-carrito li {
+          padding: 0.5rem 0.5rem;
+          font-size: 0.95rem;
+        }
+        .total-compra {
+          font-size: 1rem;
+        }
+        .total-compra span {
+          font-size: 1.2rem;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+  aplicarResponsive();
+</script>
+</html>

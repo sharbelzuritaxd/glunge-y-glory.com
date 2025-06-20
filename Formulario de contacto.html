@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario de contacto - Grunge & Glory</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&family=Unica+One&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Share Tech Mono', monospace;
+      color: #00ff00;
+      background: #0e0e0e url('images/fondo-blur.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: rgba(0, 0, 0, 0.85);
+      border-bottom: 2px solid #ff0000;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      color: #00ff00;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #00ff00;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-family: 'Unica One', sans-serif;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+      padding: 0.5rem 0.8rem;
+      border-radius: 4px;
+    }
+
+    nav ul li a:hover {
+      color: #ff0000;
+      text-shadow: 0 0 8px rgba(255, 0, 0, 0.7);
+      background-color: rgba(255, 0, 0, 0.05);
+    }
+
+    .contact-form {
+      max-width: 600px;
+      margin: 4rem auto;
+      padding: 2rem;
+      background-color: rgba(0, 0, 0, 0.85);
+      border: 2px solid #ff0000;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+      border-radius: 8px;
+    }
+
+    .contact-form h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: #00ff00;
+    }
+
+    .contact-form label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-family: 'Unica One', sans-serif;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #00ff00;
+      background-color: #0e0e0e;
+      color: #00ff00;
+      font-family: 'Share Tech Mono', monospace;
+      border-radius: 4px;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: #ff0000;
+      box-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+    }
+
+    .contact-form button {
+      display: block;
+      width: 100%;
+      padding: 0.8rem;
+      background-color: #ff0000;
+      border: none;
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+
+    .contact-form button:hover {
+      background-color: #990000;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: rgba(0, 0, 0, 0.9);
+      color: #00ff00;
+      border-top: 2px solid #ff0000;
+      margin-top: 4rem;
+      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>GRUNGE & GLORY</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="tienda.html">Tienda</a></li>
+        <li><a href="comentarios.html">Foro</a></li>
+        <li><a href="usario y resgristro.html">Registro</a></li>
+        <li><a href="calendario.html">Agenda</a></li>
+         <li><a href="contacto.html">Contacto</a></li>
+         <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="Subida.html">Galería</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <form class="contact-form">
+    <h2>Formulario de contacto</h2>
+    <label for="nombre">Nombre</label>
+    <input type="text" id="nombre" name="nombre" required>
+
+    <label for="email">Correo electrónico</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="mensaje">Mensaje</label>
+    <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+
+    <button type="submit">Enviar</button>
+  </form>
+  <script>
+    document.querySelector('.contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nombre = document.getElementById('nombre').value;
+      const email = document.getElementById('email').value;
+      const mensaje = document.getElementById('mensaje').value;
+      const datos = { nombre, email, mensaje };
+      localStorage.setItem('contacto', JSON.stringify(datos));
+      alert('¡Datos guardados en localStorage!');
+      this.reset();
+    });
+    // Modo oscuro / claro con persistencia en LocalStorage
+  function aplicarTema(tema) {
+    if (tema === 'claro') {
+      document.body.style.background = "#f4f4f4";
+      document.body.style.color = "#222";
+      document.querySelectorAll('.container, .carrito-container').forEach(el => {
+        el.style.background = "rgba(0,0,0,0.03)";
+        el.style.borderColor = "#ccc";
+        el.style.boxShadow = "0 0 20px rgba(0,0,0,0.1), inset 0 0 10px rgba(0,0,0,0.05)";
+      });
+      document.querySelectorAll('.producto').forEach(el => {
+        el.style.background = "#fff";
+        el.style.borderColor = "#ddd";
+        el.style.boxShadow = "inset 0 0 10px rgba(0,0,0,0.05)";
+      });
+      document.querySelectorAll('header, footer').forEach(el => {
+        el.style.backgroundColor = "#fff";
+        el.style.color = "#222";
+        el.style.borderColor = "#222";
+      });
+    } else {
+      document.body.style.background = "#0e0e0e url('fondo-blur.jpg') no-repeat center center fixed";
+      document.body.style.backgroundSize = "cover";
+      document.body.style.color = "#00ff00";
+      document.querySelectorAll('.container, .carrito-container').forEach(el => {
+        el.style.background = "rgba(255,255,255,0.05)";
+        el.style.borderColor = "#2d0000";
+        el.style.boxShadow = "0 0 20px rgba(255,0,0,0.6), inset 0 0 10px rgba(0,255,0,0.3)";
+      });
+      document.querySelectorAll('.producto').forEach(el => {
+        el.style.background = "#2a2a2a";
+        el.style.borderColor = "#4b4b4b";
+        el.style.boxShadow = "inset 0 0 10px rgba(0,0,0,0.7)";
+      });
+      document.querySelectorAll('header, footer').forEach(el => {
+        el.style.backgroundColor = "rgba(0,0,0,0.85)";
+        el.style.color = "#00ff00";
+        el.style.borderColor = "#ff0000";
+      });
+    }
+  }
+
+  function guardarTema(tema) {
+    localStorage.setItem('tema', tema);
+  }
+
+  function obtenerTema() {
+    return localStorage.getItem('tema') || 'oscuro';
+  }
+
+  function alternarTema() {
+    const temaActual = obtenerTema();
+    const nuevoTema = temaActual === 'oscuro' ? 'claro' : 'oscuro';
+    aplicarTema(nuevoTema);
+    guardarTema(nuevoTema);
+    document.getElementById('btn-tema').textContent = nuevoTema === 'oscuro' ? 'Modo claro' : 'Modo oscuro';
+  }
+
+  // Botón flotante para alternar tema
+  const btn = document.createElement('button');
+  btn.id = 'btn-tema';
+  btn.textContent = obtenerTema() === 'oscuro' ? 'Modo claro' : 'Modo oscuro';
+  btn.style.position = 'fixed';
+  btn.style.bottom = '24px';
+  btn.style.right = '24px';
+  btn.style.zIndex = '9999';
+  btn.style.background = '#222';
+  btn.style.color = '#00ff00';
+  btn.style.border = '2px solid #ff0000';
+  btn.style.padding = '0.7rem 1.2rem';
+  btn.style.borderRadius = '6px';
+  btn.style.fontFamily = "'Share Tech Mono', monospace";
+  btn.style.boxShadow = '0 0 12px #00ff00';
+  btn.style.cursor = 'pointer';
+  btn.onclick = alternarTema;
+  document.body.appendChild(btn);
+
+  // Aplicar tema al cargar
+  aplicarTema(obtenerTema());
+   // Adaptación fluida a móvil, tablet y escritorio (responsive)
+  window.addEventListener('DOMContentLoaded', () => {
+    function ajustarResponsive() {
+      if (window.innerWidth < 600) {
+        document.querySelector('.container').style.padding = '1rem';
+        document.querySelector('.container').style.maxWidth = '98vw';
+      } else {
+        document.querySelector('.container').style.padding = '2.5rem';
+        document.querySelector('.container').style.maxWidth = '900px';
+      }
+    }
+    ajustarResponsive();
+    window.addEventListener('resize', ajustarResponsive);
+  });
+</script>
+</html>
+  </script>
+
+  <footer>
+    <p>&copy; 2025 Grunge & Glory. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>

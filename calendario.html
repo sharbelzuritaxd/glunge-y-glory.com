@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Agenda - Grunge & Glory</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&family=Unica+One&display=swap" rel="stylesheet">
+<style>
+  /* CSS GLOBAL - APLICADO A TODAS LAS PÁGINAS */
+  body {
+    margin: 0;
+    font-family: 'Share Tech Mono', monospace;
+    color: #00ff00; /* Verde neón */
+    background: #0e0e0e url('fondo-blur.jpg') no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: rgba(0, 0, 0, 0.85);
+    border-bottom: 2px solid #ff0000; /* Rojo vibrante */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  header h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    color: #00ff00; /* Verde neón */
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem; /* Aumentado el espacio entre enlaces */
+    margin: 0;
+    padding: 0;
+  }
+
+  nav ul li a {
+    text-decoration: none;
+    color: #00ff00; /* Verde neón */
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: 'Unica One', sans-serif;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    padding: 0.5rem 0.8rem;
+    border-radius: 4px;
+  }
+
+  nav ul li a:hover {
+    color: #ff0000; /* Efecto hover rojo */
+    text-shadow: 0 0 8px rgba(255, 0, 0, 0.7);
+    background-color: rgba(255, 0, 0, 0.05);
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 2rem auto;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2.5rem;
+    border-radius: 8px;
+    border: 2px solid #2d0000; /* Rojo oscuro */
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6), inset 0 0 10px rgba(0, 255, 0, 0.3);
+  }
+
+  h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+    margin-bottom: 2rem;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
+    font-size: 2rem;
+  }
+
+  input, textarea {
+    background-color: #2a2a2a;
+    color: #00ff00;
+    border: 1px solid #ff0000;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+    border-radius: 4px;
+    box-shadow: inset 0 0 8px rgba(255, 0, 0, 0.5);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: rgba(0, 255, 0, 0.5);
+  }
+
+  input:focus, textarea:focus {
+    border-color: #00ff00;
+    box-shadow: inset 0 0 12px #00ff00;
+  }
+
+  button {
+    background: #4a1e1e;
+    color: #00ff00;
+    border: 1px solid #ff0000;
+    padding: 0.9rem 1.8rem;
+    border-radius: 4px;
+    font-family: 'Share Tech Mono', monospace;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+  }
+
+  button:hover {
+    background: #660000;
+    box-shadow: 0 0 10px #00ff00;
+    color: #fff;
+  }
+
+  .error {
+    color: #ff3b3b;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-align: left;
+    margin-top: -0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #00ff00;
+    border-top: 2px solid #ff0000;
+    margin-top: 4rem;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  /* CSS ESPECÍFICO DE LA PÁGINA DEL CALENDARIO */
+  #calendario {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #2a2a2a;
+    border: 1px solid #4b4b4b;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.7);
+    margin-top: 1.5rem; /* Espacio debajo del título */
+  }
+
+  #calendario th, #calendario td {
+    padding: 0.7rem; /* Más padding */
+    text-align: center;
+    border: 1px solid #4b4b4b;
+  }
+
+  #calendario th {
+    background-color: #4a1e1e;
+    color: #00ff00;
+    font-family: 'Unica One', sans-serif;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+  }
+
+  #calendario td {
+    height: 90px; /* Un poco más alto para los días */
+    vertical-align: top;
+    font-family: 'Share Tech Mono', monospace;
+    color: #ccc;
+    font-size: 1.2rem; /* Tamaño de día más grande */
+    position: relative; /* Para posicionar eventos si se añaden */
+  }
+
+  #calendario td.evento {
+    background-color: #842e22; /* Fondo del día con evento */
+    cursor: pointer;
+    box-shadow: inset 0 0 12px rgba(255, 0, 0, 0.8); /* Sombra más fuerte para resaltar eventos */
+    color: #fff;
+    font-weight: bold;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  #calendario td.evento:hover {
+    background-color: #a0352a; /* Rojo un poco más claro al pasar el mouse */
+    box-shadow: inset 0 0 15px #00ff00; /* Sombra verde neón al pasar el mouse */
+  }
+
+  #detalles-evento {
+    background-color: #2a2a2a;
+    border: 1px solid #4b4b4b;
+    padding: 1.5rem; /* Más padding */
+    margin-top: 3rem; /* Más espacio sobre los detalles del evento */
+    border-radius: 8px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.7);
+    font-family: 'Unica One', sans-serif;
+    color: #eee;
+  }
+
+  #detalles-evento h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: #00ff00;
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+    font-size: 1.5rem;
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.7);
+  }
+
+  #detalles-evento p {
+    margin: 0;
+    color: #ccc;
+    font-size: 1.1rem;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>GRUNGE & GLORY</h1>
+  <nav>
+    <ul>
+      <li><a href="file:///C:/Users/asus/OneDrive/Escritorio/Grunge%20&%20Glory/Grunge%20&%20Glory.html">Inicio</a></li>
+      <li><a href="tienda.html">Tienda</a></li>
+      <li><a href="comentarios.html">Foro</a></li>
+      <li><a href="usario y resgristro.html">Registro</a></li>
+      <li><a href="calendario.html">Agenda</a></li>
+       <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="Subida.html">Galería</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>Agenda de Eventos</h2>
+  <table id="calendario">
+    <thead>
+      <tr>
+        <th>Lun</th>
+        <th>Mar</th>
+        <th>Mié</th>
+        <th>Jue</th>
+        <th>Vie</th>
+        <th>Sáb</th>
+        <th>Dom</th>
+      </tr>
+    </thead>
+    <tbody id="cuerpo-calendario"></tbody>
+  </table>
+  <div id="detalles-evento"></div>
+</div>
+
+<footer>
+  <p>&copy; 2025 Grunge & Glory. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+  // Datos de eventos de ejemplo
+  const eventos = [
+    { fecha: '2025-06-05', titulo: 'Lanzamiento de Ropa de Invierno', descripcion: 'Colección exclusiva de invierno con diseños grunge y punk.' },
+    { fecha: '2025-06-12', titulo: 'Concierto de Bandas Locales', descripcion: 'Noche de música en vivo con talentos emergentes de la escena underground.' },
+    { fecha: '2025-06-20', titulo: 'Taller de Diseño DIY', descripcion: 'Aprende a personalizar tu ropa con estilo grunge.' },
+  ];
+
+  // Función para generar el calendario
+  function generarCalendario() {
+    const hoy = new Date();
+    const mes = hoy.getMonth();
+    const ano = hoy.getFullYear();
+
+    let primerDiaMes = new Date(ano, mes, 1);
+    // getDay() devuelve 0 para domingo, 1 para lunes, etc.
+    // Ajustamos para que lunes sea 0, martes 1, etc.
+    let primerDiaSemana = primerDiaMes.getDay();
+    if (primerDiaSemana === 0) primerDiaSemana = 6; // Si es domingo (0), lo convierte a 6 (fin de semana)
+    else primerDiaSemana--; // Resta 1 para que lunes sea 0, martes 1, etc.
+
+    const ultimoDia = new Date(ano, mes + 1, 0).getDate();
+
+    let dia = 1;
+    let cuerpoCalendario = document.getElementById('cuerpo-calendario');
+    cuerpoCalendario.innerHTML = ''; // Limpiar cualquier contenido previo
+
+    let fila = document.createElement('tr');
+
+    // Celdas vacías al principio del mes
+    for (let i = 0; i < primerDiaSemana; i++) {
+      const celda = document.createElement('td');
+      fila.appendChild(celda);
+    }
+
+    // Días del mes
+    while (dia <= ultimoDia) {
+      const celda = document.createElement('td');
+      // Formatear la fecha para la búsqueda de eventos (YYYY-MM-DD)
+      const fechaActualString = `${ano}-${(mes + 1).toString().padStart(2, '0')}-${dia.toString().padStart(2, '0')}`;
+      const eventoDelDia = eventos.find(e => e.fecha === fechaActualString);
+
+      if (eventoDelDia) {
+        celda.classList.add('evento');
+        // Puedes añadir un pequeño indicador visual del evento
+        celda.innerHTML = `<span>${dia}</span><br><small>${eventoDelDia.titulo}</small>`;
+        celda.addEventListener('click', () => mostrarDetallesEvento(eventoDelDia));
+      } else {
+        celda.textContent = dia;
+      }
+      fila.appendChild(celda);
+
+      // Si es el final de la semana (domingo) o el último día del mes
+      if ((primerDiaSemana + dia) % 7 === 0 || dia === ultimoDia) {
+        cuerpoCalendario.appendChild(fila);
+        fila = document.createElement('tr'); // Reiniciar la fila para la siguiente semana
+      }
+
+      dia++;
+    }
+
+    // Celdas vacías al final del mes para completar la última semana
+    // Solo si la última fila no está completa y no es la última del mes
+    while (fila.children.length > 0 && fila.children.length < 7) {
+      const celda = document.createElement('td');
+      fila.appendChild(celda);
+    }
+    // Asegurarse de añadir la última fila si tiene celdas (y no se añadió ya)
+    if (fila.children.length > 0 && cuerpoCalendario.lastChild !== fila) {
+        cuerpoCalendario.appendChild(fila);
+    }
+  }
+
+  // Función para mostrar los detalles del evento
+  function mostrarDetallesEvento(evento) {
+    const detallesEvento = document.getElementById('detalles-evento');
+    detallesEvento.innerHTML = `
+      <h3>${evento.titulo}</h3>
+      <p>Fecha: ${evento.fecha}</p>
+      <p>${evento.descripcion}</p>
+    `;
+  }
+
+  // Generar el calendario al cargar la página
+  generarCalendario();
+  // --- CREACIÓN/EDICIÓN DE EVENTOS ---
+
+  // Crear formulario para añadir/editar eventos
+  function crearFormularioEvento(fecha, eventoExistente = null) {
+    const detallesEvento = document.getElementById('detalles-evento');
+    detallesEvento.innerHTML = `
+      <h3>${eventoExistente ? 'Editar Evento' : 'Nuevo Evento'}</h3>
+      <form id="form-evento">
+        <label>
+          Título:<br>
+          <input type="text" id="titulo-evento" value="${eventoExistente ? eventoExistente.titulo : ''}" required>
+        </label><br><br>
+        <label>
+          Descripción:<br>
+          <textarea id="descripcion-evento" rows="3" required>${eventoExistente ? eventoExistente.descripcion : ''}</textarea>
+        </label><br><br>
+        <input type="hidden" id="fecha-evento" value="${fecha}">
+        <button type="submit">${eventoExistente ? 'Guardar Cambios' : 'Crear Evento'}</button>
+        <button type="button" id="cancelar-evento">Cancelar</button>
+        ${eventoExistente ? '<button type="button" id="eliminar-evento" style="margin-left:1em;color:#ff3b3b;border-color:#ff3b3b;">Eliminar</button>' : ''}
+      </form>
+    `;
+
+    document.getElementById('cancelar-evento').onclick = () => {
+      detallesEvento.innerHTML = '';
+    };
+
+    if (eventoExistente) {
+      document.getElementById('eliminar-evento').onclick = () => {
+        eliminarEvento(fecha);
+        detallesEvento.innerHTML = '';
+        generarCalendario();
+      };
+    }
+
+    document.getElementById('form-evento').onsubmit = function(e) {
+      e.preventDefault();
+      const titulo = document.getElementById('titulo-evento').value.trim();
+      const descripcion = document.getElementById('descripcion-evento').value.trim();
+      if (!titulo || !descripcion) return;
+      if (eventoExistente) {
+        editarEvento(fecha, titulo, descripcion);
+      } else {
+        agregarEvento(fecha, titulo, descripcion);
+      }
+      detallesEvento.innerHTML = '';
+      generarCalendario();
+    };
+  }
+
+  // Agregar evento
+  function agregarEvento(fecha, titulo, descripcion) {
+    eventos.push({ fecha, titulo, descripcion });
+  }
+
+  // Editar evento
+  function editarEvento(fecha, titulo, descripcion) {
+    const idx = eventos.findIndex(e => e.fecha === fecha);
+    if (idx !== -1) {
+      eventos[idx].titulo = titulo;
+      eventos[idx].descripcion = descripcion;
+    }
+  }
+
+  // Eliminar evento
+  function eliminarEvento(fecha) {
+    const idx = eventos.findIndex(e => e.fecha === fecha);
+    if (idx !== -1) {
+      eventos.splice(idx, 1);
+    }
+  }
+
+  // Modificar la generación del calendario para permitir crear/editar eventos
+  function generarCalendario() {
+    const hoy = new Date();
+    const mes = hoy.getMonth();
+    const ano = hoy.getFullYear();
+
+    let primerDiaMes = new Date(ano, mes, 1);
+    let primerDiaSemana = primerDiaMes.getDay();
+    if (primerDiaSemana === 0) primerDiaSemana = 6;
+    else primerDiaSemana--;
+
+    const ultimoDia = new Date(ano, mes + 1, 0).getDate();
+
+    let dia = 1;
+    let cuerpoCalendario = document.getElementById('cuerpo-calendario');
+    cuerpoCalendario.innerHTML = '';
+
+    let fila = document.createElement('tr');
+
+    for (let i = 0; i < primerDiaSemana; i++) {
+      const celda = document.createElement('td');
+      fila.appendChild(celda);
+    }
+
+    while (dia <= ultimoDia) {
+      const celda = document.createElement('td');
+      const fechaActualString = `${ano}-${(mes + 1).toString().padStart(2, '0')}-${dia.toString().padStart(2, '0')}`;
+      const eventoDelDia = eventos.find(e => e.fecha === fechaActualString);
+
+      if (eventoDelDia) {
+        celda.classList.add('evento');
+        celda.innerHTML = `<span>${dia}</span><br><small>${eventoDelDia.titulo}</small>`;
+        celda.addEventListener('click', (e) => {
+          e.stopPropagation();
+          mostrarDetallesEvento(eventoDelDia, fechaActualString);
+        });
+        // Doble click para editar
+        celda.addEventListener('dblclick', (e) => {
+          e.stopPropagation();
+          crearFormularioEvento(fechaActualString, eventoDelDia);
+        });
+      } else {
+        celda.textContent = dia;
+        celda.style.cursor = 'pointer';
+        celda.title = 'Haz clic para crear un evento';
+        celda.addEventListener('click', (e) => {
+          e.stopPropagation();
+          crearFormularioEvento(fechaActualString);
+        });
+      }
+      fila.appendChild(celda);
+
+      if ((primerDiaSemana + dia) % 7 === 0 || dia === ultimoDia) {
+        cuerpoCalendario.appendChild(fila);
+        fila = document.createElement('tr');
+      }
+      dia++;
+    }
+
+    while (fila.children.length > 0 && fila.children.length < 7) {
+      const celda = document.createElement('td');
+      fila.appendChild(celda);
+    }
+    if (fila.children.length > 0 && cuerpoCalendario.lastChild !== fila) {
+      cuerpoCalendario.appendChild(fila);
+    }
+  }
+
+  // Modificar mostrarDetallesEvento para permitir editar
+  function mostrarDetallesEvento(evento, fecha) {
+    const detallesEvento = document.getElementById('detalles-evento');
+    detallesEvento.innerHTML = `
+      <h3>${evento.titulo}</h3>
+      <p>Fecha: ${evento.fecha}</p>
+      <p>${evento.descripcion}</p>
+      <button id="editar-evento">Editar</button>
+    `;
+    document.getElementById('editar-evento').onclick = () => {
+      crearFormularioEvento(fecha, evento);
+    };
+  }
+
+  // Generar el calendario al cargar la página
+  generarCalendario();
+  // Guardar eventos en localStorage
+  function guardarEventos() {
+    localStorage.setItem('eventosGrungeGlory', JSON.stringify(eventos));
+  }
+
+  // Cargar eventos de localStorage
+  function cargarEventos() {
+    const guardados = localStorage.getItem('eventosGrungeGlory');
+    if (guardados) {
+      try {
+        const arr = JSON.parse(guardados);
+        if (Array.isArray(arr)) {
+          eventos.length = 0;
+          eventos.push(...arr);
+        }
+      } catch (e) {
+        // Si hay error, ignorar y usar los eventos por defecto
+      }
+    }
+  }
+
+  // Modifica agregar, editar y eliminar para guardar en localStorage
+  function agregarEvento(fecha, titulo, descripcion) {
+    eventos.push({ fecha, titulo, descripcion });
+    guardarEventos();
+  }
+
+  function editarEvento(fecha, titulo, descripcion) {
+    const idx = eventos.findIndex(e => e.fecha === fecha);
+    if (idx !== -1) {
+      eventos[idx].titulo = titulo;
+      eventos[idx].descripcion = descripcion;
+      guardarEventos();
+    }
+  }
+
+  function eliminarEvento(fecha) {
+    const idx = eventos.findIndex(e => e.fecha === fecha);
+    if (idx !== -1) {
+      eventos.splice(idx, 1);
+      guardarEventos();
+    }
+  }
+
+  // Al cargar la página, primero cargar eventos de localStorage
+  cargarEventos();
+  // Modo oscuro / claro con persistencia en LocalStorage
+  function aplicarTema(tema) {
+    if (tema === 'claro') {
+      document.body.style.background = "#f4f4f4";
+      document.body.style.color = "#222";
+      document.querySelectorAll('.container, .carrito-container').forEach(el => {
+        el.style.background = "rgba(0,0,0,0.03)";
+        el.style.borderColor = "#ccc";
+        el.style.boxShadow = "0 0 20px rgba(0,0,0,0.1), inset 0 0 10px rgba(0,0,0,0.05)";
+      });
+      document.querySelectorAll('.producto').forEach(el => {
+        el.style.background = "#fff";
+        el.style.borderColor = "#ddd";
+        el.style.boxShadow = "inset 0 0 10px rgba(0,0,0,0.05)";
+      });
+      document.querySelectorAll('header, footer').forEach(el => {
+        el.style.backgroundColor = "#fff";
+        el.style.color = "#222";
+        el.style.borderColor = "#222";
+      });
+    } else {
+      document.body.style.background = "#0e0e0e url('fondo-blur.jpg') no-repeat center center fixed";
+      document.body.style.backgroundSize = "cover";
+      document.body.style.color = "#00ff00";
+      document.querySelectorAll('.container, .carrito-container').forEach(el => {
+        el.style.background = "rgba(255,255,255,0.05)";
+        el.style.borderColor = "#2d0000";
+        el.style.boxShadow = "0 0 20px rgba(255,0,0,0.6), inset 0 0 10px rgba(0,255,0,0.3)";
+      });
+      document.querySelectorAll('.producto').forEach(el => {
+        el.style.background = "#2a2a2a";
+        el.style.borderColor = "#4b4b4b";
+        el.style.boxShadow = "inset 0 0 10px rgba(0,0,0,0.7)";
+      });
+      document.querySelectorAll('header, footer').forEach(el => {
+        el.style.backgroundColor = "rgba(0,0,0,0.85)";
+        el.style.color = "#00ff00";
+        el.style.borderColor = "#ff0000";
+      });
+    }
+  }
+
+  function guardarTema(tema) {
+    localStorage.setItem('tema', tema);
+  }
+
+  function obtenerTema() {
+    return localStorage.getItem('tema') || 'oscuro';
+  }
+
+  function alternarTema() {
+    const temaActual = obtenerTema();
+    const nuevoTema = temaActual === 'oscuro' ? 'claro' : 'oscuro';
+    aplicarTema(nuevoTema);
+    guardarTema(nuevoTema);
+    document.getElementById('btn-tema').textContent = nuevoTema === 'oscuro' ? 'Modo claro' : 'Modo oscuro';
+  }
+
+  // Botón flotante para alternar tema
+  const btn = document.createElement('button');
+  btn.id = 'btn-tema';
+  btn.textContent = obtenerTema() === 'oscuro' ? 'Modo claro' : 'Modo oscuro';
+  btn.style.position = 'fixed';
+  btn.style.bottom = '24px';
+  btn.style.right = '24px';
+  btn.style.zIndex = '9999';
+  btn.style.background = '#222';
+  btn.style.color = '#00ff00';
+  btn.style.border = '2px solid #ff0000';
+  btn.style.padding = '0.7rem 1.2rem';
+  btn.style.borderRadius = '6px';
+  btn.style.fontFamily = "'Share Tech Mono', monospace";
+  btn.style.boxShadow = '0 0 12px #00ff00';
+  btn.style.cursor = 'pointer';
+  btn.onclick = alternarTema;
+  document.body.appendChild(btn);
+
+  // Aplicar tema al cargar
+  aplicarTema(obtenerTema());
+   // Adaptación fluida a móvil, tablet y escritorio (responsive)
+  window.addEventListener('DOMContentLoaded', () => {
+    function ajustarResponsive() {
+      if (window.innerWidth < 600) {
+        document.querySelector('.container').style.padding = '1rem';
+        document.querySelector('.container').style.maxWidth = '98vw';
+      } else {
+        document.querySelector('.container').style.padding = '2.5rem';
+        document.querySelector('.container').style.maxWidth = '900px';
+      }
+    }
+    ajustarResponsive();
+    window.addEventListener('resize', ajustarResponsive);
+  });
+</script>
+</html>
+</script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Inicio - Grunge & Glory</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&family=Unica+One&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Share Tech Mono', monospace;
+      color: #00ff00;
+      background: #0e0e0e url('images/fondo-blur.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: rgba(0, 0, 0, 0.85);
+      border-bottom: 2px solid #ff0000;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      color: #00ff00;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #00ff00;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-family: 'Unica One', sans-serif;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+      padding: 0.5rem 0.8rem;
+      border-radius: 4px;
+    }
+
+    nav ul li a:hover {
+      color: #ff0000;
+      text-shadow: 0 0 8px rgba(255, 0, 0, 0.7);
+      background-color: rgba(255, 0, 0, 0.05);
+    }
+
+    .carousel {
+      position: relative;
+      max-width: 100%;
+      height: 400px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+      border: 2px solid #ff0000;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+    }
+
+    .carousel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .carousel img.active {
+      opacity: 1;
+    }
+
+    .carousel-controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      z-index: 2;
+    }
+
+    .carousel-controls button {
+      background-color: rgba(0, 0, 0, 0.6);
+      border: none;
+      color: #00ff00;
+      font-size: 2rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .carousel-controls button:hover {
+      background-color: rgba(255, 0, 0, 0.6);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
+    }
+
+    .hero h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      color: #00ff00;
+      letter-spacing: 0.1em;
+    }
+
+    .hero p {
+      font-family: 'Unica One', sans-serif;
+      font-size: 1.3rem;
+      max-width: 800px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+      color: #ccc;
+    }
+
+    a.boton-tienda {
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: rgba(0, 0, 0, 0.9);
+      color: #00ff00;
+      border-top: 2px solid #ff0000;
+      margin-top: 4rem;
+      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>GRUNGE & GLORY</h1>
+    <nav>
+      <ul>
+        <li><a href="https://1234pp.netlify.app/tienda">Inicio</a></li>
+        <li><a href="tienda.html">Tienda</a></li>
+        <li><a href="comentarios.html">Foro</a></li>
+        <li><a href="usario y resgristro.html">Registro</a></li>
+        <li><a href="calendario.html">Agenda</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+         <li><a href="Subida.html">Galería</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="carousel">
+    <img src="IMAGENES/imagesbanner1.png.jpeg" class="active" alt="Banner 1">
+    <img src="IMAGENES/HP_insta_carousel_WK22_4.jpg" alt="Banner 2">
+  
+  </div>
+
+    <div class="carousel-controls">
+      <button>‹</button>
+      <button>›</button>
+    </div>
+  </div>
+
+  <main>
+    <section class="hero">
+      <h2>Explora el Mundo Grunge & Glory</h2>
+      <p>Tu destino definitivo para la moda alternativa, eventos de música underground y una comunidad vibrante. Sumérgete en el espíritu del punk, grunge y la cultura underground.</p>
+      <a href="tienda.html" class="boton-tienda button">Visita nuestra Tienda</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Grunge & Glory. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    window.onload = function () {
+      const slides = document.querySelectorAll('.carousel img');
+      const prevBtn = document.querySelector('.carousel-controls button:nth-child(1)');
+      const nextBtn = document.querySelector('.carousel-controls button:nth-child(2)');
+      let currentSlide = 0;
+
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.remove('active');
+          if (i === index) slide.classList.add('active');
+        });
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      }
+
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+      }
+
+      prevBtn.addEventListener('click', prevSlide);
+      nextBtn.addEventListener('click', nextSlide);
+
+      setInterval(nextSlide, 5000);
+    };
+  </script>
+</body>
+<script>
+  // Modo oscuro / claro con persistencia en LocalStorage
+  function aplicarTema(tema) {
+    if (tema === 'claro') {
+      document.body.style.background = "#f4f4f4";
+      document.body.style.color = "#222";
+      document.querySelectorAll('.container, .carrito-container').forEach(el => {
+        el.style.background = "rgba(0,0,0,0.03)";
+        el.style.borderColor = "#ccc";
+        el.style.boxShadow = "0 0 20px rgba(0,0,0,0.1), inset 0 0 10px rgba(0,0,0,0.05)";
+      });
+      document.querySelectorAll('.producto').forEach(el => {
+        el.style.background = "#fff";
+        el.style.borderColor = "#ddd";
+        el.style.boxShadow = "inset 0 0 10px rgba(0,0,0,0.05)";
+      });
+      document.querySelectorAll('header, footer').forEach(el => {
+        el.style.backgroundColor = "#fff";
+        el.style.color = "#222";
+        el.style.borderColor = "#222";
+      });
+    } else {
+      document.body.style.background = "#0e0e0e url('fondo-blur.jpg') no-repeat center center fixed";
+      document.body.style.backgroundSize = "cover";
+      document.body.style.color = "#00ff00";
+      document.querySelectorAll('.container, .carrito-container').forEach(el => {
+        el.style.background = "rgba(255,255,255,0.05)";
+        el.style.borderColor = "#2d0000";
+        el.style.boxShadow = "0 0 20px rgba(255,0,0,0.6), inset 0 0 10px rgba(0,255,0,0.3)";
+      });
+      document.querySelectorAll('.producto').forEach(el => {
+        el.style.background = "#2a2a2a";
+        el.style.borderColor = "#4b4b4b";
+        el.style.boxShadow = "inset 0 0 10px rgba(0,0,0,0.7)";
+      });
+      document.querySelectorAll('header, footer').forEach(el => {
+        el.style.backgroundColor = "rgba(0,0,0,0.85)";
+        el.style.color = "#00ff00";
+        el.style.borderColor = "#ff0000";
+      });
+    }
+  }
+
+  function guardarTema(tema) {
+    localStorage.setItem('tema', tema);
+  }
+
+  function obtenerTema() {
+    return localStorage.getItem('tema') || 'oscuro';
+  }
+
+  function alternarTema() {
+    const temaActual = obtenerTema();
+    const nuevoTema = temaActual === 'oscuro' ? 'claro' : 'oscuro';
+    aplicarTema(nuevoTema);
+    guardarTema(nuevoTema);
+    document.getElementById('btn-tema').textContent = nuevoTema === 'oscuro' ? 'Modo claro' : 'Modo oscuro';
+  }
+
+  // Botón flotante para alternar tema
+  const btn = document.createElement('button');
+  btn.id = 'btn-tema';
+  btn.textContent = obtenerTema() === 'oscuro' ? 'Modo claro' : 'Modo oscuro';
+  btn.style.position = 'fixed';
+  btn.style.bottom = '24px';
+  btn.style.right = '24px';
+  btn.style.zIndex = '9999';
+  btn.style.background = '#222';
+  btn.style.color = '#00ff00';
+  btn.style.border = '2px solid #ff0000';
+  btn.style.padding = '0.7rem 1.2rem';
+  btn.style.borderRadius = '6px';
+  btn.style.fontFamily = "'Share Tech Mono', monospace";
+  btn.style.boxShadow = '0 0 12px #00ff00';
+  btn.style.cursor = 'pointer';
+  btn.onclick = alternarTema;
+  document.body.appendChild(btn);
+
+  // Aplicar tema al cargar
+  aplicarTema(obtenerTema());
+</script>
+<!-- Redes sociales -->
+<div style="position: fixed; left: 1.5rem; bottom: 1.5rem; z-index: 1000; display: flex; flex-direction: column; gap: 0.7rem;">
+  <a href="https://facebook.com/" target="_blank" aria-label="Facebook" style="background:rgba(0,0,0,0.7); border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center; border:2px solid #ff0000;">
+    <svg width="24" height="24" fill="#00ff00" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.325 24h11.495v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0"/></svg>
+  </a>
+  <a href="https://instagram.com/" target="_blank" aria-label="Instagram" style="background:rgba(0,0,0,0.7); border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center; border:2px solid #ff0000;">
+    <svg width="24" height="24" fill="#00ff00" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.332 3.608 1.308.974.975 1.244 2.242 1.306 3.608.058 1.266.069 1.646.069 4.85s-.011 3.584-.069 4.85c-.062 1.366-.332 2.633-1.306 3.608-.975.974-2.242 1.244-3.608 1.306-1.266.058-1.646.069-4.85.069s-3.584-.011-4.85-.069c-1.366-.062-2.633-.332-3.608-1.306-.974-.975-1.244-2.242-1.306-3.608C2.175 15.647 2.163 15.267 2.163 12s.012-3.584.07-4.85c.062-1.366.332-2.633 1.306-3.608C4.514 2.565 5.781 2.295 7.147 2.233 8.413 2.175 8.793 2.163 12 2.163zm0-2.163C8.741 0 8.332.012 7.052.07 5.771.128 4.659.388 3.678 1.37 2.697 2.352 2.437 3.464 2.379 4.745 2.321 6.025 2.309 6.434 2.309 12c0 5.566.012 5.975.07 7.255.058 1.281.318 2.393 1.299 3.375.981.981 2.093 1.241 3.374 1.299 1.28.058 1.689.07 7.255.07s5.975-.012 7.255-.07c1.281-.058 2.393-.318 3.374-1.299.981-.982 1.241-2.094 1.299-3.375.058-1.28.07-1.689.07-7.255s-.012-5.975-.07-7.255c-.058-1.281-.318-2.393-1.299-3.375-.981-.982-2.093-1.242-3.374-1.299C15.668.012 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-7.998 3.999 3.999 0 0 1 0 7.998zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
+  </a>
+  <a href="https://linkedin.com/" target="_blank" aria-label="LinkedIn" style="background:rgba(0,0,0,0.7); border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center; border:2px solid #ff0000;">
+    <svg width="24" height="24" fill="#00ff00" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm15.5 11.268h-3v-5.604c0-1.337-.025-3.063-1.867-3.063-1.868 0-2.154 1.459-2.154 2.967v5.7h-3v-10h2.881v1.367h.041c.401-.761 1.379-1.563 2.841-1.563 3.039 0 3.6 2.001 3.6 4.601v5.595z"/></svg>
+  </a>
+</div>
+<!-- 
+  Visualmente atractivo, coherente con la identidad del proyecto.
+  Adaptación fluida a móvil, tablet y escritorio.
+  (Nota: Este mensaje es solo para referencia y no se muestra en la página)
+-->
+</html>
+
